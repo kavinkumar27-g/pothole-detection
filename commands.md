@@ -1,25 +1,92 @@
-#COMMANDS USED IN RASPBERRY PI 5 SETUP
-System update
-sudo apt update sudo apt upgrade
+# Raspberry Pi 5 Setup
 
-#Create Project Directory
-mkdir yolo cd yolo
+## 1. Update the System
 
-#Create Virtual Environment
-python3 -m venv --system-site-packages venv 
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+---
+
+## 2. Create the Project Directory
+
+```bash
+mkdir yolo
+cd yolo
+```
+
+---
+
+## 3. Create and Activate a Python Virtual Environment
+
+```bash
+python3 -m venv --system-site-packages venv
 source venv/bin/activate
+```
 
-#Install Required Packages
+---
+
+## 4. Install Required Python Packages
+
+```bash
 pip install ultralytics ncnn
+```
 
-#Check Connected Camera
+---
+
+## 5. Verify Camera Connection
+
+```bash
 ls /dev/video*
+```
 
-#Export Trained Model to NCNN Format
+If your USB camera is detected, it will appear as:
+
+```text
+/dev/video0
+```
+
+---
+
+## 6. Export the YOLO Model to NCNN Format
+
+```bash
 yolo export model=potholes.pt format=ncnn
+```
 
-#Download Inference Script
+This creates the NCNN model folder:
+
+```text
+potholes_ncnn_model/
+```
+
+---
+
+## 7. Download the Inference Script
+
+```bash
 wget https://ejtech.io/code/yolo_detect.py
+```
 
-#Run Real-Time Detection
-python yolo_detect.py --model=potholes_ncnn_model --source=usb0 --resolution=1280x720
+---
+
+## 8. Run Real-Time Pothole Detection
+
+For a USB Camera:
+
+```bash
+python yolo_detect.py \
+    --model=potholes_ncnn_model \
+    --source=usb0 \
+    --resolution=1280x720
+```
+
+For a Raspberry Pi Camera Module:
+
+```bash
+python yolo_detect.py \
+    --model=potholes_ncnn_model \
+    --source=picamera \
+    --resolution=1280x720
+```
