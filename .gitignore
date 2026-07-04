@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.env
+
+# Virtual Environment — never push this to GitHub
+backend/venv/
+venv/
+env/
+
+# Node modules — never push this to GitHub
+node_modules/
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/.vite/
+
+# Data files (optional — remove this line if you want to push saved potholes)
+backend/potholes_data.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
